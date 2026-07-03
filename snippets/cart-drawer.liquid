@@ -1,0 +1,10 @@
+<div class="backdrop" id="cart-backdrop" data-close-cart></div>
+<aside class="drawer" id="cart-drawer" aria-label="Cart">
+  <div class="dh"><h3 style="font-size:17px">Your cart</h3><button class="iconbtn" data-close-cart aria-label="Close">&#10005;</button></div>
+  <div class="di" id="drawer-items"><div class="empty">Your cart is empty.</div></div>
+  <div class="df">
+    <div style="display:flex;justify-content:space-between;font-weight:700;margin-bottom:14px"><span>Subtotal</span><span id="drawer-subtotal">$0.00</span></div>
+    <form action="{{ routes.cart_url }}" method="post"><button type="submit" name="checkout" class="btn block">Checkout</button></form>
+    <a href="{{ routes.all_products_collection_url }}" class="muted" style="display:block;text-align:center;margin-top:12px;font-size:13px" data-close-cart>Continue shopping</a>
+  </div>
+</aside>

@@ -1,0 +1,66 @@
+<div class="wrap">
+  <div class="crumbs"><a href="{{ routes.root_url }}">Home</a> / <a href="{{ routes.all_products_collection_url }}">Shop</a> / {{ product.title }}</div>
+  <div class="product">
+    <div class="gallery">
+      <div class="main" id="gallery-wrap">
+        {%- if product.featured_image -%}<img id="gallery-main" src="{{ product.featured_image | image_url: width: 1000 }}" alt="{{ product.featured_image.alt | escape }}">
+        {%- else -%}<img class="ph" src="{{ 'banfana-wordmark-white.png' | asset_url }}" alt="{{ product.title | escape }}">{%- endif -%}
+      </div>
+      {%- if product.images.size > 1 -%}
+      <div class="thumbs">
+        {%- for image in product.images limit: 6 -%}
+          <img data-thumb data-full="{{ image | image_url: width: 1000 }}" src="{{ image | image_url: width: 160 }}" alt="" class="{% if forloop.first %}active{% endif %}">
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+    </div>
+
+    <div class="pinfo">
+      {%- if product.type != blank -%}<div class="ptype">{{ product.type }}</div>{%- endif -%}
+      <h1>{{ product.title }}</h1>
+      <div class="rating-inline" id="rating-inline"></div>
+      <div class="pprice" id="p-price">{{ product.selected_or_first_available_variant.price | money }}</div>
+
+      <form id="product-form" action="{{ routes.cart_url }}/add" method="post">
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <div class="opt">
+              <label>{{ option.name }}</label>
+              <div class="swatches">
+                {%- for value in option.values -%}
+                  <button type="button" class="swatch{% if option.selected_value == value %} active{% endif %}" data-opt="opt{{ option.position }}" data-val="{{ value | escape }}">{{ value }}</button>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endunless -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <div class="qtyrow">
+          <div class="qty"><button type="button" data-qty="-1">–</button><input type="number" name="quantity" value="1" min="1" aria-label="Quantity"><button type="button" data-qty="1">+</button></div>
+          <button type="submit" class="btn block" style="flex:1"{% unless product.available %} disabled{% endunless %}>{% if product.available %}Add to cart{% else %}Sold out{% endif %}</button>
+        </div>
+      </form>
+
+      <div class="acc">
+        <details open><summary>Description</summary><div class="accbody">{{ product.description | default: 'A premium Banfana essential.' }}</div></details>
+        <details><summary>Shipping &amp; returns</summary><div class="accbody"><p>Ships in 1–2 business days with tracking. All sales are final — see our <a href="/policies/refund-policy" style="color:var(--brand)">refund policy</a> for damaged or incorrect items.</p></div></details>
+        <details><summary>About this demo</summary><div class="accbody">This product exists to demonstrate the Banfana feed engine. The description and highlights above were auto-generated — that's the whole point.</div></details>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap"><div class="reviews">
+  <div class="section-head"><div><h2>Reviews</h2></div></div>
+  <div id="review-widget" data-handle="{{ product.handle }}"></div>
+</div></div>
+
+<script type="application/json" id="variant-data">
+[{%- for v in product.variants -%}{"id":{{ v.id }},"price":{{ v.price }},"available":{{ v.available }},"options":[{%- for o in v.options -%}{{ o | json }}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]
+</script>
+<script type="application/json" id="pd">
+{"name":{{ product.title | json }},"image":"https:{{ product.featured_image | image_url: width: 1200 }}","description":{{ product.description | strip_html | truncate: 300 | json }},"sku":{{ product.selected_or_first_available_variant.sku | json }},"price":"{{ product.price | money_without_currency | strip_html }}","currency":{{ cart.currency.iso_code | json }},"available":{{ product.available }},"url":{{ product.url | prepend: shop.url | json }}}
+</script>
+{% schema %}
+{ "name":"Product","settings":[],"enabled_on":{"templates":["product"]} }
+{% endschema %}

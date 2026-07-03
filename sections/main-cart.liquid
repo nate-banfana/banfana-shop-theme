@@ -1,0 +1,32 @@
+<div class="wrap"><div class="section">
+  <div class="section-head"><div><h2>Your cart</h2></div></div>
+  {%- if cart.item_count > 0 -%}
+  {% form 'cart', cart %}
+    <table class="cart-table">
+      <thead><tr><th>Product</th><th>Qty</th><th style="text-align:right">Total</th></tr></thead>
+      <tbody>
+      {%- for item in cart.items -%}
+        <tr>
+          <td style="display:flex;gap:12px;align-items:center">
+            {%- if item.image -%}<img src="{{ item.image | image_url: width: 120 }}" alt="" style="width:56px;height:56px;border-radius:10px;object-fit:cover">{%- endif -%}
+            <span><a href="{{ item.url }}">{{ item.product.title }}</a>{%- unless item.product.has_only_default_variant -%}<br><span class="muted" style="font-size:12px">{{ item.variant.title }}</span>{%- endunless -%}</span>
+          </td>
+          <td><input type="number" name="updates[]" value="{{ item.quantity }}" min="0" style="width:64px;background:var(--bg2);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:7px"></td>
+          <td style="text-align:right">{{ item.final_line_price | money }}</td>
+        </tr>
+      {%- endfor -%}
+      </tbody>
+    </table>
+    <div class="cart-foot">
+      <span class="muted">Subtotal</span><span class="price">{{ cart.total_price | money }}</span>
+      <button type="submit" name="update" class="btn ghost">Update</button>
+      <button type="submit" name="checkout" class="btn">Checkout</button>
+    </div>
+  {% endform %}
+  {%- else -%}
+    <div class="empty">Your cart is empty.<br><a href="{{ routes.all_products_collection_url }}" style="color:var(--brand)">Shop the collection &rarr;</a></div>
+  {%- endif -%}
+</div></div>
+{% schema %}
+{ "name":"Cart","settings":[],"enabled_on":{"templates":["cart"]} }
+{% endschema %}

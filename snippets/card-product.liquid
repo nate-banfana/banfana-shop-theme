@@ -1,0 +1,21 @@
+<a href="{{ product.url }}" class="card" data-price="{{ product.price }}" data-title="{{ product.title | escape }}">
+  <div class="thumb">
+    {%- if product.featured_image -%}
+      <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | escape }}" loading="lazy" width="600" height="600">
+    {%- else -%}
+      <img class="ph" src="{{ 'banfana-wordmark-white.png' | asset_url }}" alt="{{ product.title | escape }}">
+    {%- endif -%}
+    {%- if product.type != blank -%}<span class="tag">{{ product.type }}</span>{%- endif -%}
+  </div>
+  <div class="cbody">
+    <h3>{{ product.title }}</h3>
+    <div data-review-handle="{{ product.handle }}"></div>
+    <div class="crow">
+      <span class="price">
+        {%- if product.compare_at_price > product.price -%}<span class="was">{{ product.compare_at_price | money }}</span>{%- endif -%}
+        {{ product.price | money }}
+      </span>
+      <span class="muted" style="font-size:13px">View &rarr;</span>
+    </div>
+  </div>
+</a>

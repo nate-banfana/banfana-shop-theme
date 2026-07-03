@@ -1,0 +1,144 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "asset": "hero.jpg",
+        "eyebrow": "◆ A live demo of the Banfana feed engine",
+        "heading": "A store built to flex a product feed tool.",
+        "text": "Full disclosure: nobody needs a Banfana enamel pin. But we needed a catalog to run through the feed engine — so we made one. The photos are generated, the descriptions wrote themselves, and checkout technically works. It's a feed-tool demo you can actually add to cart.",
+        "btn_label": "Shop the demo",
+        "btn_link": "/collections/all",
+        "highlight": "product feed tool"
+      }
+    },
+    "props": {
+      "type": "value-props",
+      "blocks": {
+        "a": {
+          "type": "prop",
+          "settings": {
+            "icon": "◆",
+            "title": "Suspiciously premium",
+            "text": "For fake demo merch"
+          }
+        },
+        "b": {
+          "type": "prop",
+          "settings": {
+            "icon": "↗",
+            "title": "Feed-ready",
+            "text": "Descriptions wrote themselves"
+          }
+        },
+        "c": {
+          "type": "prop",
+          "settings": {
+            "icon": "☕",
+            "title": "All sales final",
+            "text": "It's a demo, relax"
+          }
+        },
+        "d": {
+          "type": "prop",
+          "settings": {
+            "icon": "★",
+            "title": "Peak metadata",
+            "text": "Structured data, unmatched"
+          }
+        }
+      },
+      "block_order": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ]
+    },
+    "cats": {
+      "type": "collection-list",
+      "settings": {
+        "heading": "Shop by category",
+        "sub": "Pick a corner of the catalog we invented."
+      },
+      "blocks": {
+        "a": {
+          "type": "cat",
+          "settings": {
+            "asset": "cat-apparel.jpg",
+            "label": "Apparel",
+            "sub": "Tees · Hoodies · Caps",
+            "link": "/collections/apparel"
+          }
+        },
+        "b": {
+          "type": "cat",
+          "settings": {
+            "asset": "cat-drinkware.jpg",
+            "label": "Drinkware",
+            "sub": "Bottles · Mugs · Tumblers",
+            "link": "/collections/drinkware"
+          }
+        },
+        "c": {
+          "type": "cat",
+          "settings": {
+            "asset": "cat-bags.jpg",
+            "label": "Bags & Accessories",
+            "sub": "Totes · Sleeves · More",
+            "link": "/collections/bags-accessories"
+          }
+        },
+        "d": {
+          "type": "cat",
+          "settings": {
+            "asset": "cat-desk.jpg",
+            "label": "Desk & Tech",
+            "sub": "Notebooks · Mats · Pins",
+            "link": "/collections/desk-tech"
+          }
+        }
+      },
+      "block_order": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ]
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "The Collection",
+        "sub": "15 products we made up, enriched to look like we mean it.",
+        "count": 8
+      }
+    },
+    "reviews": {
+      "type": "reviews-carousel",
+      "settings": {}
+    },
+    "news": {
+      "type": "newsletter",
+      "settings": {}
+    },
+    "blog": {
+      "type": "blog-posts",
+      "settings": {
+        "blog": "news",
+        "heading": "From the journal",
+        "sub": "Merch, memes, and metadata — notes from the Banfana demo.",
+        "count": 3
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "props",
+    "cats",
+    "featured",
+    "reviews",
+    "blog",
+    "news"
+  ]
+}

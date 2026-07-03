@@ -1,0 +1,46 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        {%- if section.settings.logo != blank -%}<img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}">{%- else -%}<img src="{{ 'banfana-wordmark-white.png' | asset_url }}" alt="{{ shop.name }}">{%- endif -%}
+        <p style="max-width:32ch">{{ section.settings.blurb }}</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="{{ routes.all_products_collection_url }}">All products</a></li>
+          <li><a href="{{ routes.collections_url }}">Collections</a></li>
+          <li><a href="{{ routes.search_url }}">Search</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Policies</h4>
+        <ul>
+          {%- for policy in shop.policies -%}
+            {%- if policy != blank -%}<li><a href="{{ policy.url }}">{{ policy.title }}</a></li>{%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+      <div class="fnews">
+        <h4>{{ section.settings.news_title }}</h4>
+        <p style="margin:0 0 12px">{{ section.settings.news_text }}</p>
+        {% form 'customer' %}
+          <input type="email" name="contact[email]" placeholder="you@email.com" aria-label="Email">
+          <button class="btn block" type="submit">Subscribe</button>
+        {% endform %}
+      </div>
+    </div>
+    <div class="fbottom">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. A demo storefront.</span>
+      <span>Powered by the Banfana feed engine.</span>
+    </div>
+  </div>
+</footer>
+{% schema %}
+{ "name":"Footer","settings":[
+  {"type":"image_picker","id":"logo","label":"Logo"},
+  {"type":"text","id":"blurb","label":"Blurb","default":"Demo storefront — merch we invented to show what the Banfana feed engine does to a catalog."},
+  {"type":"text","id":"news_title","label":"Newsletter title","default":"Get the drop"},
+  {"type":"text","id":"news_text","label":"Newsletter text","default":"Mostly product-feed updates, occasionally merch."}
+]}
+{% endschema %}

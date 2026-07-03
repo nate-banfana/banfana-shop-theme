@@ -1,0 +1,22 @@
+<div class="wrap">
+  <div class="coll-head">
+    <h1>{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}<p class="muted" style="max-width:60ch;margin-top:8px">{{ collection.description | strip_html | truncate: 160 }}</p>{%- endif -%}
+  </div>
+  <div class="toolbar">
+    <span class="muted">{{ collection.products_count }} product{{ collection.products_count | pluralize: '','s' }}</span>
+    <select id="sortby" aria-label="Sort">
+      <option value="featured">Featured</option>
+      <option value="title">Alphabetical</option>
+      <option value="price-asc">Price: low to high</option>
+      <option value="price-desc">Price: high to low</option>
+    </select>
+  </div>
+  <div class="grid" id="product-grid">
+    {%- for product in collection.products -%}{% render 'card-product', product: product %}
+    {%- else -%}<p class="muted">No products in this collection yet.</p>{%- endfor -%}
+  </div>
+</div>
+{% schema %}
+{ "name":"Collection","settings":[],"enabled_on":{"templates":["collection"]} }
+{% endschema %}

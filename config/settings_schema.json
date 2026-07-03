@@ -1,0 +1,20 @@
+[
+  { "name": "theme_info", "theme_name": "Banfana", "theme_version": "2.1.1", "theme_author": "Banfana", "theme_documentation_url": "https://banfana.com", "theme_support_url": "https://banfana.com" },
+  { "name": "Colors", "settings": [
+    { "type": "color", "id": "color_bg", "label": "Background", "default": "#0a0a0c" },
+    { "type": "color", "id": "color_bg2", "label": "Surface", "default": "#141418" },
+    { "type": "color", "id": "color_text", "label": "Text", "default": "#f1f1f4" },
+    { "type": "color", "id": "color_muted", "label": "Muted text", "default": "#9a9aa6" },
+    { "type": "color", "id": "color_border", "label": "Border", "default": "#26262e" },
+    { "type": "color", "id": "color_brand", "label": "Accent", "default": "#deaf13" },
+    { "type": "color", "id": "color_brand_text", "label": "On accent", "default": "#1a1400" }
+  ]},
+  { "name": "Typography", "settings": [
+    { "type": "font_picker", "id": "font_heading", "label": "Headings", "default": "archivo_n7" },
+    { "type": "font_picker", "id": "font_body", "label": "Body", "default": "inter_n4" }
+  ]},
+  { "name": "Layout", "settings": [
+    { "type": "range", "id": "page_width", "label": "Page width", "min": 1000, "max": 1400, "step": 20, "unit": "px", "default": 1180 },
+    { "type": "range", "id": "card_radius", "label": "Corner radius", "min": 0, "max": 24, "step": 2, "unit": "px", "default": 16 }
+  ]}
+]

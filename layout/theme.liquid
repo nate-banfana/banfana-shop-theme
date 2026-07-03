@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_bg }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="icon" type="image/png" sizes="512x512" href="{{ 'favicon.png' | asset_url }}">
+  <link rel="apple-touch-icon" href="{{ 'favicon.png' | asset_url }}">
+  {%- if request.page_type == 'index' -%}
+    <title>{{ shop.name }} &mdash; studio-grade demo merch, powered by the Banfana feed engine</title>
+  {%- else -%}
+    <title>{{ page_title }}{% unless page_title contains shop.name %} &middot; {{ shop.name }}{% endunless %}</title>
+  {%- endif -%}
+  {%- assign meta_desc = page_description -%}
+  {%- if meta_desc == blank and request.page_type == 'index' -%}{%- assign meta_desc = 'Banfana Supply is a live demo store showcasing the Banfana product-feed engine: AI-enriched product data, structured schema, and Google Shopping-ready listings on real merch.' -%}{%- endif -%}
+  {%- if meta_desc == blank and request.page_type == 'collection' and collection -%}{%- capture meta_desc -%}Shop {{ collection.title }} from Banfana Supply — {{ collection.products_count }} products with AI-enriched detail and honest, self-aware copy.{%- endcapture -%}{%- endif -%}
+  {%- if meta_desc == blank and request.page_type == 'article' and article -%}{%- assign meta_desc = article.excerpt_or_content | strip_html | truncate: 155 -%}{%- endif -%}
+  {%- if meta_desc != blank -%}<meta name="description" content="{{ meta_desc | strip_html | escape }}">{%- endif -%}
+  {% render 'meta-tags', meta_desc: meta_desc %}
+  <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
+  <style>
+    {{ settings.font_body | font_face: font_display: 'swap' }}
+    {{ settings.font_heading | font_face: font_display: 'swap' }}
+    :root{
+      --bg:{{ settings.color_bg }};--bg2:{{ settings.color_bg2 }};--text:{{ settings.color_text }};
+      --muted:{{ settings.color_muted }};--border:{{ settings.color_border }};--brand:{{ settings.color_brand }};
+      --brand-text:{{ settings.color_brand_text }};--radius:{{ settings.card_radius }}px;--page:{{ settings.page_width }}px;
+      --font-body:{{ settings.font_body.family }},{{ settings.font_body.fallback_families }};
+      --font-heading:{{ settings.font_heading.family }},{{ settings.font_heading.fallback_families }};
+    }
+    body{font-family:var(--font-body)}
+    h1,h2,h3,h4{font-family:var(--font-heading)}
+  </style>
+  <script src="{{ 'reviews.js' | asset_url }}" defer></script>
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  {{ content_for_header }}
+</head>
+<body class="template-{{ request.page_type | handle }}">
+  <a class="skip" href="#main">Skip to content</a>
+  {% section 'announcement' %}
+  {% section 'header' %}
+  <main id="main">{{ content_for_layout }}</main>
+  {% section 'footer' %}
+  {% render 'cart-drawer' %}
+</body>
+</html>

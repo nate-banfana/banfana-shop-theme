@@ -1,0 +1,12 @@
+<meta property="og:site_name" content="{{ shop.name }}">
+<meta property="og:type" content="{% if request.page_type == 'product' %}product{% else %}website{% endif %}">
+<meta property="og:title" content="{{ page_title | escape }}">
+<meta property="og:url" content="{{ canonical_url }}">
+{%- if request.page_type == 'product' and product.featured_image -%}
+<meta property="og:image" content="https:{{ product.featured_image | image_url: width: 1200 }}">
+{%- endif -%}
+{%- assign od = meta_desc | default: page_description -%}{%- if od != blank -%}<meta property="og:description" content="{{ od | strip_html | escape }}">{%- endif -%}
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":{{ shop.name | json }},"url":{{ shop.url | json }}}
+</script>

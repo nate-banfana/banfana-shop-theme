@@ -1,0 +1,10 @@
+<div class="wrap"><div class="section" style="max-width:420px;margin:0 auto">
+  <h1 style="font-size:26px;margin-bottom:16px">Login</h1>
+  {% form 'customer_login' %}{{ form.errors | default_errors }}
+    <label class="muted" style="font-size:12px">Email</label>
+    <input type="email" name="customer[email]" style="width:100%;background:var(--bg2);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:11px;margin:6px 0 14px">
+    <label class="muted" style="font-size:12px">Password</label>
+    <input type="password" name="customer[password]" style="width:100%;background:var(--bg2);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:11px;margin:6px 0 16px">
+    <button class="btn block" type="submit">Sign in</button>
+  {% endform %}
+</div></div>

@@ -1,0 +1,23 @@
+<div class="wrap"><div class="section">
+  <div class="section-head"><div><h1 style="font-size:32px">{{ blog.title }}</h1><p>{{ section.settings.sub }}</p></div></div>
+  <div class="grid">
+    {%- for article in blog.articles -%}
+      <a href="{{ article.url }}" class="card">
+        <div class="thumb">
+          {%- if article.image -%}<img src="{{ article.image | image_url: width: 600 }}" alt="{{ article.title | escape }}" loading="lazy">
+          {%- else -%}<img class="ph" src="{{ 'banfana-wordmark-white.png' | asset_url }}" alt="">{%- endif -%}
+        </div>
+        <div class="cbody">
+          <span class="muted" style="font-size:12px;letter-spacing:.05em;text-transform:uppercase">{{ article.published_at | date: '%b %d, %Y' }}</span>
+          <h3 style="font-size:16px">{{ article.title }}</h3>
+          <p class="muted" style="font-size:13.5px">{{ article.excerpt_or_content | strip_html | truncate: 110 }}</p>
+        </div>
+      </a>
+    {%- else -%}
+      <p class="muted">No posts yet.</p>
+    {%- endfor -%}
+  </div>
+</div></div>
+{% schema %}
+{ "name":"Blog posts","settings":[{"type":"text","id":"sub","label":"Subheading","default":"Notes on merch, memes, and metadata."}],"enabled_on":{"templates":["blog"]} }
+{% endschema %}

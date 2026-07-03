@@ -1,0 +1,16 @@
+<section class="props"><div class="wrap">
+  {%- for block in section.blocks -%}
+    <div class="prop" {{ block.shopify_attributes }}><span class="ic">{{ block.settings.icon }}</span><b>{{ block.settings.title }}</b><span>{{ block.settings.text }}</span></div>
+  {%- endfor -%}
+</div></section>
+{% schema %}
+{ "name":"Value props","max_blocks":4,"blocks":[{"type":"prop","name":"Column","settings":[
+  {"type":"text","id":"icon","label":"Icon (emoji)","default":"◆"},
+  {"type":"text","id":"title","label":"Title","default":"Feed-ready"},
+  {"type":"text","id":"text","label":"Text","default":"Descriptions wrote themselves"}]}],
+  "presets":[{"name":"Value props","blocks":[
+    {"type":"prop","settings":{"icon":"◆","title":"Suspiciously premium","text":"For fake demo merch"}},
+    {"type":"prop","settings":{"icon":"↗","title":"Feed-ready","text":"Descriptions wrote themselves"}},
+    {"type":"prop","settings":{"icon":"☕","title":"All sales final","text":"It's a demo, relax"}},
+    {"type":"prop","settings":{"icon":"★","title":"Peak metadata","text":"Structured data, unmatched"}}]}] }
+{% endschema %}

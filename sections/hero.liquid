@@ -1,0 +1,29 @@
+{%- assign hero_bg = '' -%}
+{%- if section.settings.image != blank -%}{%- assign hero_bg = section.settings.image | image_url: width: 2200 -%}
+{%- elsif section.settings.asset != blank -%}{%- assign hero_bg = section.settings.asset | asset_url -%}{%- endif -%}
+{%- assign heading = section.settings.heading -%}
+{%- if section.settings.highlight != blank -%}
+  {%- capture wrapped -%}<span>{{ section.settings.highlight }}</span>{%- endcapture -%}
+  {%- assign heading = heading | replace: section.settings.highlight, wrapped -%}
+{%- endif -%}
+<section class="hero">
+  {%- if hero_bg != blank -%}<div class="bg" style="background-image:url({{ hero_bg }})"></div>{%- endif -%}
+  <div class="wrap">
+    {%- if section.settings.eyebrow != blank -%}<span class="pill">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    <h1>{{ heading }}</h1>
+    {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+    {%- if section.settings.btn_label != blank -%}<a class="btn" href="{{ section.settings.btn_link | default: routes.all_products_collection_url }}">{{ section.settings.btn_label }}</a>{%- endif -%}
+  </div>
+</section>
+{% schema %}
+{ "name":"Hero","settings":[
+  {"type":"image_picker","id":"image","label":"Background image"},
+  {"type":"text","id":"asset","label":"Theme asset fallback"},
+  {"type":"text","id":"eyebrow","label":"Eyebrow"},
+  {"type":"text","id":"heading","label":"Heading","default":"A store built to flex a product feed tool."},
+  {"type":"text","id":"highlight","label":"Highlighted phrase (gold)","default":"product feed tool"},
+  {"type":"textarea","id":"text","label":"Text"},
+  {"type":"text","id":"btn_label","label":"Button label","default":"Shop the demo"},
+  {"type":"url","id":"btn_link","label":"Button link"}
+],"presets":[{"name":"Hero"}] }
+{% endschema %}

@@ -1,0 +1,10 @@
+<div class="wrap"><div class="section">
+  <div class="section-head"><div><h2>{{ section.settings.heading }}</h2><p>{{ section.settings.sub }}</p></div></div>
+  <div class="rvcar" id="review-carousel"></div>
+</div></div>
+{% schema %}
+{ "name":"Reviews carousel","settings":[
+  {"type":"text","id":"heading","label":"Heading","default":"What people (allegedly) say"},
+  {"type":"text","id":"sub","label":"Subheading","default":"Real-looking reviews for a real-looking store."}],
+  "presets":[{"name":"Reviews carousel"}] }
+{% endschema %}

@@ -1,0 +1,31 @@
+<header class="site-header">
+  <div class="wrap bar">
+    <button class="iconbtn burger" id="burger" aria-label="Menu">&#9776;</button>
+    <a href="{{ routes.root_url }}" class="logo" aria-label="{{ shop.name }}">
+      {%- if section.settings.logo != blank -%}
+        <img src="{{ section.settings.logo | image_url: width: 300 }}" alt="{{ shop.name }}" style="height:{{ section.settings.logo_height }}px">
+      {%- else -%}<img src="{{ 'banfana-wordmark-white.png' | asset_url }}" alt="{{ shop.name }}" style="height:24px">{%- endif -%}
+    </a>
+    <nav class="nav">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- else -%}
+        <a href="{{ routes.all_products_collection_url }}">Shop</a>
+        <a href="{{ routes.collections_url }}">Collections</a>
+        <a href="/blogs/news">Journal</a>
+      {%- endfor -%}
+    </nav>
+    <div class="hspacer"></div>
+    <div class="hicons">
+      <a class="iconbtn" href="{{ routes.search_url }}" aria-label="Search">&#9906;</a>
+      <button class="iconbtn" data-open-cart aria-label="Cart">&#128722;<span class="count" data-cart-count>{{ cart.item_count }}</span></button>
+    </div>
+  </div>
+</header>
+{% schema %}
+{ "name":"Header","settings":[
+  {"type":"image_picker","id":"logo","label":"Logo"},
+  {"type":"range","id":"logo_height","label":"Logo height","min":16,"max":48,"step":2,"unit":"px","default":26},
+  {"type":"link_list","id":"menu","label":"Menu"}
+]}
+{% endschema %}

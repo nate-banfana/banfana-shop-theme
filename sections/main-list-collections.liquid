@@ -1,0 +1,14 @@
+<div class="wrap"><div class="section">
+  <div class="section-head"><div><h2>Collections</h2></div></div>
+  <div class="cats">
+    {%- for collection in collections -%}
+      <a class="cat" href="{{ collection.url }}">
+        {%- if collection.featured_image -%}<img src="{{ collection.featured_image | image_url: width: 800 }}" alt="{{ collection.title }}">{%- endif -%}
+        <span class="lbl">{{ collection.title }}<small>{{ collection.products_count }} products</small></span>
+      </a>
+    {%- endfor -%}
+  </div>
+</div></div>
+{% schema %}
+{ "name":"List collections","settings":[],"enabled_on":{"templates":["list-collections"]} }
+{% endschema %}
