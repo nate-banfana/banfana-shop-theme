@@ -1,5 +1,5 @@
 [
-  { "name": "theme_info", "theme_name": "Banfana", "theme_version": "2.1.1", "theme_author": "Banfana", "theme_documentation_url": "https://banfana.com", "theme_support_url": "https://banfana.com" },
+  { "name": "theme_info", "theme_name": "Banfana", "theme_version": "2.1.2", "theme_author": "Banfana", "theme_documentation_url": "https://banfana.com", "theme_support_url": "https://banfana.com" },
   { "name": "Colors", "settings": [
     { "type": "color", "id": "color_bg", "label": "Background", "default": "#0a0a0c" },
     { "type": "color", "id": "color_bg2", "label": "Surface", "default": "#141418" },

@@ -16,7 +16,7 @@
   {%- if meta_desc == blank and request.page_type == 'index' -%}{%- assign meta_desc = 'Banfana Supply is a live demo store showcasing the Banfana product-feed engine: AI-enriched product data, structured schema, and Google Shopping-ready listings on real merch.' -%}{%- endif -%}
   {%- if meta_desc == blank and request.page_type == 'collection' and collection -%}{%- capture meta_desc -%}Shop {{ collection.title }} from Banfana Supply — {{ collection.products_count }} products with AI-enriched detail and honest, self-aware copy.{%- endcapture -%}{%- endif -%}
   {%- if meta_desc == blank and request.page_type == 'article' and article -%}{%- assign meta_desc = article.excerpt_or_content | strip_html | truncate: 155 -%}{%- endif -%}
-  {%- if meta_desc != blank -%}<meta name="description" content="{{ meta_desc | strip_html | escape }}">{%- endif -%}
+  {%- if meta_desc != blank -%}<meta name="description" content="{{ meta_desc | strip_html | escape_once }}">{%- endif -%}
   {% render 'meta-tags', meta_desc: meta_desc %}
   <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}">
   <style>

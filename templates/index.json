@@ -126,7 +126,7 @@
       "type": "blog-posts",
       "settings": {
         "blog": "news",
-        "heading": "From the journal",
+        "heading": "From the blog",
         "sub": "Merch, memes, and metadata — notes from the Banfana demo.",
         "count": 3
       }
