@@ -1,14 +1,30 @@
 {%- assign blg = blogs[section.settings.blog] -%}
 {%- if blg.articles_count > 0 -%}
+{%- comment -%} Featured posts, in order. Falls back to latest posts if a handle isn't found. {%- endcomment -%}
+{%- assign feat = 'meme-apparel-is-quietly-eating-ecommerce-heres-why,what-actually-makes-a-product-feed-rank-on-google-shopping,3d-printed-merch-the-next-frontier-of-small-batch-swag' | split: ',' -%}
 <div class="wrap"><div class="section">
-  <div class="section-head"><div><h2>{{ section.settings.heading }}</h2><p>{{ section.settings.sub }}</p></div><a class="muted" href="{{ blg.url }}" style="font-size:14px">Read the journal &rarr;</a></div>
+  <div class="section-head"><div><h2>{{ section.settings.heading }}</h2><p>{{ section.settings.sub }}</p></div><a class="muted" href="{{ blg.url }}" style="font-size:14px">Read the blog &rarr;</a></div>
   <div class="grid">
-    {%- for article in blg.articles limit: section.settings.count -%}
+    {%- assign shown = 0 -%}
+    {%- for ah in feat -%}
+      {%- assign fh = blg.handle | append: '/' | append: ah -%}
+      {%- assign article = articles[fh] -%}
+      {%- if article and article.handle -%}
       <a href="{{ article.url }}" class="card">
         <div class="thumb">{%- if article.image -%}<img src="{{ article.image | image_url: width: 600 }}" alt="{{ article.title | escape }}" loading="lazy">{%- else -%}<img class="ph" src="{{ 'banfana-wordmark-white.png' | asset_url }}" alt="">{%- endif -%}</div>
         <div class="cbody"><span class="muted" style="font-size:12px;text-transform:uppercase;letter-spacing:.05em">{{ article.published_at | date: '%b %d, %Y' }}</span><h3 style="font-size:15px">{{ article.title }}</h3></div>
       </a>
+      {%- assign shown = shown | plus: 1 -%}
+      {%- endif -%}
     {%- endfor -%}
+    {%- if shown == 0 -%}
+      {%- for article in blg.articles limit: section.settings.count -%}
+        <a href="{{ article.url }}" class="card">
+          <div class="thumb">{%- if article.image -%}<img src="{{ article.image | image_url: width: 600 }}" alt="{{ article.title | escape }}" loading="lazy">{%- else -%}<img class="ph" src="{{ 'banfana-wordmark-white.png' | asset_url }}" alt="">{%- endif -%}</div>
+          <div class="cbody"><span class="muted" style="font-size:12px;text-transform:uppercase;letter-spacing:.05em">{{ article.published_at | date: '%b %d, %Y' }}</span><h3 style="font-size:15px">{{ article.title }}</h3></div>
+        </a>
+      {%- endfor -%}
+    {%- endif -%}
   </div>
 </div></div>
 {%- endif -%}
